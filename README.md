@@ -1,2 +1,1 @@
-# alx-low_level_programming
-asdfasdf
+alx-low_level_programming
