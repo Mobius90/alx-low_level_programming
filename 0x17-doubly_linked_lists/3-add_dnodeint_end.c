@@ -1,38 +1,42 @@
 #include "lists.h"
-#include <string.h>
-#include <stdio.h>
 
 /**
- * add_dnodeint_end - add a node at the end of a linked list
- * @head: The character to print
- * @n: string for the new node
- *
- * Return: new node
+ *add_dnodeint_end- add new node at the end of the sata
+ *@head:first nod
+ *@n: new node data
+ *Return: NULL if it failed
  */
 
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
+	dlistint_t *new;
 	dlistint_t *current;
-	dlistint_t *new_node;
 
-	current = *head;
-	while (current && current->next != NULL)
-		current = current->next;
-
-	new_node = malloc(sizeof(dlistint_t));
-	if (new_node == NULL)
-	{
-		free(new_node);
+	if (head == NULL)
 		return (NULL);
+
+	new = malloc(sizeof(dlistint_t));
+
+	if (new == NULL)
+		return (NULL);
+	current = *head;
+	new->n = n;
+	new->next = NULL;
+	new->prev = NULL;
+
+	if (*head == NULL)
+	{
+		(*head) = new;
+		return (new);
 	}
-	new_node->n = n;
-	new_node->next = NULL;
-    new_node->prev = current;
 
-	if (current)
-		current->next = new_node;
-	else
-		*head = new_node;
+	while (current->next != NULL)
+	{
+		current = current->next;
+	}
 
-	return (new_node);
+	current->next = new;
+	new->prev = current;
+
+	return (new);
 }
